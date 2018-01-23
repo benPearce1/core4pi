@@ -1,0 +1,14 @@
+[Unit]
+Description=core4pi
+
+[Service]
+WorkingDirectory=#{Octopus.Action[deploy web site].Output.Package.InstallationDirectoryPath}
+ExecStart=/usr/local/bin/dotnet "#{Octopus.Action[deploy web site].Output.Package.InstallationDirectoryPath}/core4pi.dll"
+Restart=always
+RestartSec=10
+User=pi
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+[Install]
+WantedBy=multi-user.target
