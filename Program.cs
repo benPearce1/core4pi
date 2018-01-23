@@ -20,6 +20,9 @@ namespace core4pi
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseKestrel(options => {
+                    options.Listen(System.Net.IPAddress.Any, 5000);
+                })
                 .Build();
     }
 }
